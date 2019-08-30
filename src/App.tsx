@@ -1,20 +1,18 @@
 import * as React from "react";
-import "./App.css";
-import Hello from "./components/Hello";
-import logo from "./logo.svg";
+import { Route, BrowserRouter } from "react-router-dom";
 
+import Home from "./components/home";
+import Login from "./components/login";
+import Logout from "./components/logout";
 class App extends React.Component {
   public render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <Hello name="Ddd" />
+        <BrowserRouter>
+          <Route exact path="/" component={Home} />
+          <Route path="/ts/login" component={Login} />
+          <Route path="/ts/logout" component={Logout} />
+        </BrowserRouter>
       </div>
     );
   }
