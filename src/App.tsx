@@ -10,6 +10,7 @@ class App extends React.Component {
       <div className="App">
         <BrowserRouter>
           <Route exact path="/" component={Home} />
+          <Route exact path="/ts/home" component={Home} />
           <Route path="/ts/login" component={Login} />
           <Route path="/ts/logout" component={Logout} />
         </BrowserRouter>

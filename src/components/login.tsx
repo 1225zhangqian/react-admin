@@ -1,16 +1,31 @@
 import * as React from "react";
-export interface IState {
+import { withRouter, RouteComponentProps } from "react-router-dom";
+interface IState {
   username: string;
   password: string;
 }
-class Login extends React.Component<IState> {
-  public state = {
+interface IProps extends RouteComponentProps<any> {
+  /* Parent component's props*/
+}
+class Login extends React.Component<IProps, IState> {
+  public readonly state: Readonly<IState> = {
     username: "",
     password: ""
   };
   onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let { name, value } = e.target;
-    this.setState({ [name]: value });
+    if (name === "username") {
+      this.setState({ username: value });
+    } else {
+      this.setState({ password: value });
+    }
+  };
+  onClick = () => {
+    let { username, password } = this.state;
+    if (username === "admin" && password === "123") {
+      console.log(this.props);
+      this.props.history.push("/ts/home");
+    }
   };
   public render() {
     const { username, password } = this.state;
@@ -30,9 +45,9 @@ class Login extends React.Component<IState> {
           onChange={this.onChange}
         />
         <br />
-        <button>login</button>
+        <button onClick={this.onClick}>login</button>
       </div>
     );
   }
 }
-export default Login;
+export default withRouter(Login as React.ComponentType<any>);
