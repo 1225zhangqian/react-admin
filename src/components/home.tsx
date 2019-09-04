@@ -1,7 +1,14 @@
 import * as React from "react";
+import { withRouter, RouteComponentProps } from "react-router-dom";
 import Hello from "./Hello";
-
-class App extends React.Component {
+interface IProps extends RouteComponentProps<any> {
+  /* Parent component's props*/
+}
+class Home extends React.Component<IProps> {
+  logout = () => {
+    window.localStorage.removeItem("authed");
+    this.props.history.push("/ts/login");
+  };
   public render() {
     return (
       <div className="App">
@@ -12,9 +19,11 @@ class App extends React.Component {
           To get started, edit <code>src/App.tsx</code> and save to reload.
         </p>
         <Hello name="Ddd" />
+
+        <button onClick={this.logout}>logout</button>
       </div>
     );
   }
 }
 
-export default App;
+export default withRouter(Home as React.ComponentType<any>);

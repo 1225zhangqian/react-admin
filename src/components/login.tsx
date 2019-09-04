@@ -23,7 +23,7 @@ class Login extends React.Component<IProps, IState> {
   onClick = () => {
     let { username, password } = this.state;
     if (username === "admin" && password === "123") {
-      console.log(this.props);
+      window.localStorage.setItem("authed", "true");
       this.props.history.push("/ts/home");
     }
   };
